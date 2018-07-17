@@ -9,8 +9,8 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "es-check": "^2.0.4",
-    "webpack-cli": "^3.0.8"
+  "devDependencies": {},
+  "dependencies": {
+    "request": "^2.87.0"
   }
 }
