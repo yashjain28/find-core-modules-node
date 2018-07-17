@@ -2,12 +2,13 @@
 
 This package helps you find the core modules used by a node package. It gives a Green Flag if the package or it's dependency doesn't use a single core module of node.
 
+Currently, this script only runs for OSX. 
 ## Usage
     ./findCoreModules.sh <npm-package-name> [--rmlog]
 
 Example: 
 ```
-./findCoreModules.sh clearblade
+$ ./findCoreModules.sh clearblade
 
 + clearblade@1.12.2
 added 118 packages in 4.894s

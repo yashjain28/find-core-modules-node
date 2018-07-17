@@ -3,16 +3,16 @@ curr="$(pwd)"
 tempDir=$(printf '%s' "$1" | md5)
 logFile=log_$tempDir.txt
 outFile="$curr/$logFile"
-rm -f "$outFile"
+rm "$outFile"
 #echo "$hash"
-rm -rf "$tempDir"
+rm -r "$tempDir"
 mkdir "$tempDir"
 cd "$tempDir"
 #echo "$curr"
 npm init -y 2>&1 >/dev/null && npm i --loglevel=error "$1"
 if [ $? -ne 0 ]; then
     echo "Wrong package name"
-    rm -rf "$tempDir"
+    rm -r "$tempDir"
     exit 1
 fi
 cd node_modules
@@ -27,15 +27,15 @@ for i in "${libs[@]}"; do
 done
 cd ../..
 #echo "$(pwd)"
-rm -rf "$tempDir"
+rm -r "$tempDir"
 if [[ -s "$outFile" ]]; then
     echo "Red Flag - has few core modules, check $logFile"
     if [ "$2" == "--rmlog" ]; then
-        rm -f $outFile 
+        rm $outFile 
     fi
     exit 1
 else
     echo "GREEN Flag - This package is free of core modules"
-    rm -f "$outFile"
+    rm "$outFile"
     exit 0
 fi
