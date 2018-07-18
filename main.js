@@ -1,30 +1,48 @@
 
-var fs = require("fs");
-var log = require("./log").log;
-var dir_reader = require("./directory-reader");
-var getCoreModules = require("./core-module-lister");
-var flag_parser = require('./flag-parser');
-const core_modules = getCoreModules();
+
+const flag_parser = require('./flag-parser');
 const flags = flag_parser.parseFlags();
+const helper = require('./helper');
+const mkdirp = require("mkdirp");
+const crypto = require("crypto");
+const exec = require("child_process").exec;
+const path = require('path')
 
-
-const directory = flags.dir;
-log("Currently reading dir: ", directory);
-dir_reader.walk(directory, walkerCallback);
-
-function walkerCallback(err, results) {
-  var matches, success = true;
-  if (err) throw err;
-  for (const abspath of results) {
-    var content = fs.readFileSync(abspath, "utf8");
-    var regex = /require\('(.*)'\)/g;
-    while ((matches = regex.exec(content))) {
-      if (core_modules.includes(matches[1])) {
-        log(abspath, matches[1]);
-        success = false;
-      }
-    }
-  }
-  (success)?log("Free of core modules"):log("Contains few Core Modules");
+const cwd = process.cwd();
+const packageName = flags.packageName;
+if (!packageName) {
+  console.log("Package name not passed");
+  process.exit(1);
 }
 
+const hashedValue = crypto
+  .createHash("md5")
+  .update(packageName)
+  .digest("hex");
+const directory = path.join(cwd, hashedValue);
+
+mkdirp.sync(directory);
+
+options = {
+    cwd:directory
+}
+const command = "npm init --loglevel=error -y && npm i --loglevel=error " + flags.packageName;
+var child = exec(command, options,  function(err, stdout, stderr){
+    if(err){
+        console.log("error: ", err);
+        helper.deleteFolderRecursive(directory);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+    
+    if(stderr) console.log(`stderr: ${stderr}`);
+    const package = path.join(directory, "node_modules");
+    const searchOptions = {
+        logfile:flags.logFile,
+        logmode:flags.logMode
+    }
+    console.log("Searching: ", package);
+    helper.search(package,searchOptions,  function(err, success){
+        helper.deleteFolderRecursive(directory);
+    });
+});

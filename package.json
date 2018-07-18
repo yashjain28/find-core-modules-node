@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "list": "node main.js"
+    "list": "node main.js",
+    "check": "node main.js --log-mode tofile --package"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
+    "mkdirp": "0.5.1"
   }
 }
