@@ -1,6 +1,6 @@
 {
   "name": "core-module-finder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This package helps user find if a npm package requires any core module(s) of node",
   "keywords": [
       "core",
@@ -10,7 +10,9 @@
       "find",
       "uses",
       "default",
-      "inbuilt"    
+      "inbuilt",
+      "check",
+      "verify"    
   ],
   "main": "main.js",
   "scripts": {
