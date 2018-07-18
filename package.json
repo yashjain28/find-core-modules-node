@@ -1,16 +1,32 @@
 {
-  "name": "mapper-stage-2",
+  "name": "core-module-finder",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This package helps user find if a npm package requires any core module(s) of node",
+  "keywords": [
+      "core",
+      "modules",
+      "search",
+      "require",
+      "find",
+      "uses",
+      "default",
+      "inbuilt"    
+  ],
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "list": "node main.js",
-    "check": "node main.js --log-mode tofile --package"
+    "check": "node main.js --log-mode tofile --package",
+    "shellcheck":"./findCoreModules.sh"
   },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {},
+  "homepage": "https://github.com/yashjain28/find-core-modules-node",
+  "bugs": {
+    "url": "https://github.com/yashjain28/find-core-modules-node/issues"
+  },
+  "repository": {
+    "type":"git",
+    "url":"https://github.com/yashjain28/find-core-modules-node"
+  },
+  "author": "Yash Jain <yashkjain1994@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "mkdirp": "0.5.1"
   }
