@@ -35,7 +35,7 @@ if [[ -s "$outFile" ]]; then
     if [ "$2" == "--rmlog" ]; then
         rm $outFile 
     fi
-    #exit 1
+    exit 1
 else
     echo "GREEN Flag - This package is free of core modules"
     rm "$outFile"
