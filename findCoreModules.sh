@@ -1,4 +1,6 @@
 #!/bin/sh
+## Dependency is ag: https://github.com/ggreer/the_silver_searcher
+## Please install this before running this script
 curr="$(pwd)"
 tempDir=$(printf '%s' "$1" | md5)
 logFile=log_$tempDir.txt
@@ -9,7 +11,7 @@ rm -r "$tempDir"
 mkdir "$tempDir"
 cd "$tempDir"
 #echo "$curr"
-npm init -y 2>&1 >/dev/null && npm i --loglevel=error "$1"
+npm init -y --loglevel=error && npm i --loglevel=error "$1"
 if [ $? -ne 0 ]; then
     echo "Wrong package name"
     rm -r "$tempDir"

@@ -19,6 +19,7 @@ If user wants to log to a custom log file
 
 
 ### Bash Script ( for OSX users)
+Note: Please install the dependency: ag aka [the-silver-searcher](https://github.com/ggreer/the_silver_searcher) before running the script
 
     ./findCoreModules.sh <package-name> [--rmlog]
     
